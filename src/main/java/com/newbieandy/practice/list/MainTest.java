@@ -10,6 +10,7 @@ public class MainTest {
 //        myArrayListTest();
 //        myLinkedListTest();
 //        myStackTest();
+        //test
         bracketTest();
     }
 
