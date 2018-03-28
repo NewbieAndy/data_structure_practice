@@ -7,8 +7,10 @@ import java.util.Iterator;
  */
 public class MainTest {
     public static void main(String[] args) {
-        myArrayListTest();
-        myLinkedListTest();
+//        myArrayListTest();
+//        myLinkedListTest();
+//        myStackTest();
+        bracketTest();
     }
 
     public static void myArrayListTest() {
@@ -32,6 +34,70 @@ public class MainTest {
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
+    }
+
+    public static void myStackTest() {
+        MyStack<Integer> stack = new MyStack<Integer>();
+        System.out.println(stack.size());
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+        System.out.println(stack.size());
+        System.out.println(stack.peek());
+        System.out.println(stack.size());
+        System.out.println(stack.pop());
+        System.out.println(stack.size());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+    }
+
+    //校验代码括号
+    private static void bracketTest() {
+        String code = "System.out.println (stack.pop())";
+        MyStack<Character> codeStack = new MyStack();
+        char[] chars = code.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            char aChar = chars[i];
+            if (aChar == '{' || aChar == '(' || aChar == '[') {
+                codeStack.push(aChar);
+            }
+            if (aChar == '}' || aChar == ')' || aChar == ']') {
+                if (codeStack.isEmpty()) {
+                    System.out.println("缺少符号:" + getMappingChar(aChar));
+                }
+                Character popChar = codeStack.pop();
+                if (!(aChar == getMappingChar(popChar))) {
+                    System.out.println("符号:" + aChar + "与符号:" + popChar + "不对应");
+                }
+            }
+        }
+        if (!codeStack.isEmpty()) {
+            System.out.println("代码缺少括号");
+        } else {
+            System.out.println("代码没问题");
+        }
+    }
+
+    private static char getMappingChar(char achar) {
+        switch (achar) {
+            case '[':
+                return ']';
+            case ']':
+                return '[';
+            case '(':
+                return ')';
+            case ')':
+                return '(';
+            case '{':
+                return '}';
+            case '}':
+                return '{';
+        }
+        return achar;
     }
 
 }
