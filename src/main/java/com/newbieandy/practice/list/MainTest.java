@@ -12,8 +12,7 @@ public class MainTest {
 //        myStackTest();
 //        bracketTest();
         myQueueTest();
-        //test
-        bracketTest();
+//        bracketTest();
     }
 
     public static void myArrayListTest() {
@@ -116,11 +115,6 @@ public class MainTest {
         myQueue.enqueue(8);
         myQueue.enqueue(9);
         myQueue.enqueue(10);
-        myQueue.enqueue(11);
-        myQueue.enqueue(12);
-        myQueue.enqueue(13);
-        myQueue.enqueue(14);
-        myQueue.enqueue(15);
         for (int i = 0; i < 5; i++) {
             System.out.println(myQueue.dequeue());
         }

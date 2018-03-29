@@ -11,6 +11,8 @@ public class MyQueue<T> {
     private T[] theArray;
     //元素个数
     private int currentSize;
+    //当前容量
+    private int currentCapactiy;
     //头指针
     private int head;
     //尾指针
@@ -26,13 +28,14 @@ public class MyQueue<T> {
 
     //入队
     public void enqueue(T value) {
-        if (currentSize == theArray.length) {
+        if (currentSize == currentCapactiy) {
             ensureCapacity(currentSize * 2 + 1);
         }
         theArray[tail++] = value;
-        if (tail >= theArray.length) {
-            tail = tail % theArray.length;
-            System.out.println("入队当前🔢长度:" + theArray.length);
+        if (tail >=currentCapactiy) {
+            tail = tail % currentCapactiy;
+            System.out.println("当前tail指针位置"+tail);
+            System.out.println("入队当前队列容量:" + currentCapactiy);
         }
         currentSize++;
     }
@@ -43,9 +46,10 @@ public class MyQueue<T> {
             throw new NoSuchElementException();
         }
         T t = theArray[head++];
-        if (head >= theArray.length) {
-            head = head % theArray.length;
-            System.out.println("出队当前🔢长度:" + theArray.length);
+        if (head >=currentCapactiy) {
+            head = head % currentCapactiy;
+            System.out.println("当前head指针位置"+head);
+            System.out.println("出队当前队列容量:" + currentCapactiy);
         }
         currentSize--;
         return t;
@@ -55,6 +59,7 @@ public class MyQueue<T> {
         if (currentSize > newCapacity) {
             return;
         }
+        currentCapactiy=newCapacity;
         T[] oldArry = theArray;
         theArray = (T[]) new Object[newCapacity];
         for (int i = 0; i < currentSize; i++) {
