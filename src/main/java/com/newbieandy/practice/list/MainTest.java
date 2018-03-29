@@ -12,6 +12,8 @@ public class MainTest {
 //        myStackTest();
 //        bracketTest();
         myQueueTest();
+        //test
+        bracketTest();
     }
 
     public static void myArrayListTest() {
