@@ -32,9 +32,9 @@ public class MyQueue<T> {
             ensureCapacity(currentSize * 2 + 1);
         }
         theArray[tail++] = value;
-        if (tail >=currentCapactiy) {
+        if (tail >= currentCapactiy) {
             tail = tail % currentCapactiy;
-            System.out.println("当前tail指针位置"+tail);
+            System.out.println("当前tail指针位置" + tail);
             System.out.println("入队当前队列容量:" + currentCapactiy);
         }
         currentSize++;
@@ -46,24 +46,40 @@ public class MyQueue<T> {
             throw new NoSuchElementException();
         }
         T t = theArray[head++];
-        if (head >=currentCapactiy) {
+        if (head >= currentCapactiy) {
             head = head % currentCapactiy;
-            System.out.println("当前head指针位置"+head);
+            System.out.println("当前head指针位置" + head);
             System.out.println("出队当前队列容量:" + currentCapactiy);
         }
         currentSize--;
         return t;
     }
 
-    public void ensureCapacity(int newCapacity) {
+    private void ensureCapacity(int newCapacity) {
         if (currentSize > newCapacity) {
             return;
         }
-        currentCapactiy=newCapacity;
+        int oldCapacity = currentCapactiy;
+        currentCapactiy = newCapacity;
         T[] oldArry = theArray;
         theArray = (T[]) new Object[newCapacity];
-        for (int i = 0; i < currentSize; i++) {
-            theArray[i] = oldArry[i];
+        if (newCapacity == DEFAULT_CAPACITY || (head == 0 && tail == 0)) {
+            for (int i = 0; i < currentSize; i++) {
+                theArray[i] = oldArry[i];
+            }
+        } else {
+            int oldArryIdx = 0;
+            for (int i = 0; i < currentSize; i++) {
+                oldArryIdx = head + i;
+                if (oldArryIdx >= currentSize) {
+                    oldArryIdx = oldArryIdx - currentSize;
+                }
+                theArray[i] = oldArry[oldArryIdx];
+            }
+        }
+        if (currentSize > 0 && currentSize == oldCapacity) {
+            head = 0;
+            tail = currentSize - 1;
         }
     }
 }
