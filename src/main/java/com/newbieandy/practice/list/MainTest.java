@@ -123,11 +123,11 @@ public class MainTest {
         for (int i = 0; i < 5; i++) {
             System.out.println(myQueue.dequeue());
         }
-        myQueue.enqueue(11);
-        myQueue.enqueue(12);
-        myQueue.enqueue(13);
-        myQueue.enqueue(14);
-        myQueue.enqueue(15);
+        myQueue.enqueue(16);
+        myQueue.enqueue(17);
+        myQueue.enqueue(18);
+        myQueue.enqueue(19);
+        myQueue.enqueue(20);
 
         for (int i = 0; i < 15; i++) {
             System.out.println(myQueue.dequeue());
