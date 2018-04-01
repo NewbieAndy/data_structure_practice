@@ -34,8 +34,11 @@ public class MyQueue<T> {
         if (currentSize == currentCapactiy) {
             ensureCapacity(currentSize * 2 + 1);
         }
+        theArray[tail++] = value;
         if (tail >=currentCapactiy) {
             tail = tail % currentCapactiy;
+            System.out.println("当前tail指针位置"+tail);
+            System.out.println("入队当前队列容量:" + currentCapactiy);
         }
         currentSize++;
     }
@@ -55,16 +58,27 @@ public class MyQueue<T> {
         return t;
     }
 
-    //扩容两种情况
     public void ensureCapacity(int newCapacity) {
         if (currentSize > newCapacity) {
             return;
         }
-        currentCapactiy=newCapacity;
+        int oldCapacity = currentCapactiy;
+        currentCapactiy = newCapacity;
         T[] oldArry = theArray;
         theArray = (T[]) new Object[newCapacity];
-        for (int i = 0; i < currentSize; i++) {
-            theArray[i] = oldArry[i];
+        if (newCapacity == DEFAULT_CAPACITY || (head == 0 && tail == 0)) {
+            for (int i = 0; i < currentSize; i++) {
+                theArray[i] = oldArry[i];
+            }
+        } else {
+            int oldArryIdx = 0;
+            for (int i = 0; i < currentSize; i++) {
+                oldArryIdx = head + i;
+                if (oldArryIdx >= currentSize) {
+                    oldArryIdx = oldArryIdx - currentSize;
+                }
+                theArray[i] = oldArry[oldArryIdx];
+            }
         }
     }
 }
