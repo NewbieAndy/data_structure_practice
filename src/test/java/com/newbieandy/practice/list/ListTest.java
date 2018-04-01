@@ -1,21 +1,12 @@
 package com.newbieandy.practice.list;
 
+import org.junit.Test;
+
 import java.util.Iterator;
 
-/**
- * Created by mchao on 2018/3/26.
- */
-public class MainTest {
-    public static void main(String[] args) {
-//        myArrayListTest();
-//        myLinkedListTest();
-//        myStackTest();
-//        bracketTest();
-        myQueueTest();
-//        bracketTest();
-    }
-
-    public static void myArrayListTest() {
+public class ListTest {
+    @Test
+    public void myArrayListTest() {
         MyArrayList<Integer> list = new MyArrayList<Integer>();
         System.out.println(list.size());
         list.add(1);
@@ -26,7 +17,8 @@ public class MainTest {
         System.out.println(list.size());
     }
 
-    public static void myLinkedListTest() {
+    @Test
+    public void myLinkedListTest() {
         MyLinkedList<Integer> linkedList = new MyLinkedList<Integer>();
         linkedList.add(1);
         linkedList.add(2);
@@ -36,9 +28,44 @@ public class MainTest {
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
+
     }
 
-    public static void myStackTest() {
+    @Test
+    public void myQueueTest() {
+        MyQueue<Integer> myQueue = new MyQueue<Integer>();
+        myQueue.enqueue(1);
+        myQueue.enqueue(2);
+        myQueue.enqueue(3);
+        myQueue.enqueue(4);
+        myQueue.enqueue(5);
+        myQueue.enqueue(6);
+        myQueue.enqueue(7);
+        myQueue.enqueue(8);
+        myQueue.enqueue(9);
+        myQueue.enqueue(10);
+        myQueue.enqueue(11);
+        myQueue.enqueue(12);
+        myQueue.enqueue(13);
+        myQueue.enqueue(14);
+        myQueue.enqueue(15);
+        for (int i = 0; i < 5; i++) {
+            System.out.println(myQueue.dequeue());
+        }
+        myQueue.enqueue(16);
+        myQueue.enqueue(17);
+        myQueue.enqueue(18);
+        myQueue.enqueue(19);
+        myQueue.enqueue(20);
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println(myQueue.dequeue());
+        }
+    }
+
+    @Test
+    public void myStackTest() {
+
         MyStack<Integer> stack = new MyStack<Integer>();
         System.out.println(stack.size());
         stack.push(1);
@@ -58,7 +85,8 @@ public class MainTest {
     }
 
     //校验代码括号
-    private static void bracketTest() {
+    @Test
+    public void bracketTest() {
         String code = "System.out.println (stack.pop())";
         MyStack<Character> codeStack = new MyStack();
         char[] chars = code.toCharArray();
@@ -84,7 +112,7 @@ public class MainTest {
         }
     }
 
-    private static char getMappingChar(char achar) {
+    private char getMappingChar(char achar) {
         switch (achar) {
             case '[':
                 return ']';
@@ -100,37 +128,5 @@ public class MainTest {
                 return '{';
         }
         return achar;
-    }
-
-
-    private static void myQueueTest() {
-        MyQueue<Integer> myQueue = new MyQueue<Integer>();
-        myQueue.enqueue(1);
-        myQueue.enqueue(2);
-        myQueue.enqueue(3);
-        myQueue.enqueue(4);
-        myQueue.enqueue(5);
-/*        myQueue.enqueue(6);
-        myQueue.enqueue(7);
-        myQueue.enqueue(8);
-        myQueue.enqueue(9);
-        myQueue.enqueue(10);
-        myQueue.enqueue(11);
-        myQueue.enqueue(12);
-        myQueue.enqueue(13);
-        myQueue.enqueue(14);
-        myQueue.enqueue(15);*/
-        for (int i = 0; i < 5; i++) {
-            System.out.println(myQueue.dequeue());
-        }
-        myQueue.enqueue(16);
-        myQueue.enqueue(17);
-        myQueue.enqueue(18);
-        myQueue.enqueue(19);
-        myQueue.enqueue(20);
-
-        for (int i = 0; i < 5; i++) {
-            System.out.println(myQueue.dequeue());
-        }
     }
 }
