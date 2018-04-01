@@ -28,14 +28,14 @@ public class MyQueue<T> {
 
     //入队
     public void enqueue(T value) {
+        theArray[tail++] = value;
+        currentSize++;
+        //判断是否满了
         if (currentSize == currentCapactiy) {
             ensureCapacity(currentSize * 2 + 1);
         }
-        theArray[tail++] = value;
         if (tail >=currentCapactiy) {
             tail = tail % currentCapactiy;
-            System.out.println("当前tail指针位置"+tail);
-            System.out.println("入队当前队列容量:" + currentCapactiy);
         }
         currentSize++;
     }
@@ -55,6 +55,7 @@ public class MyQueue<T> {
         return t;
     }
 
+    //扩容两种情况
     public void ensureCapacity(int newCapacity) {
         if (currentSize > newCapacity) {
             return;

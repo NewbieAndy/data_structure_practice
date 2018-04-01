@@ -115,6 +115,11 @@ public class MainTest {
         myQueue.enqueue(8);
         myQueue.enqueue(9);
         myQueue.enqueue(10);
+        myQueue.enqueue(16);
+        myQueue.enqueue(17);
+        myQueue.enqueue(18);
+        myQueue.enqueue(19);
+        myQueue.enqueue(20);
         for (int i = 0; i < 5; i++) {
             System.out.println(myQueue.dequeue());
         }
