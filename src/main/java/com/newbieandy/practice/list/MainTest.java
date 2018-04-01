@@ -110,7 +110,7 @@ public class MainTest {
         myQueue.enqueue(3);
         myQueue.enqueue(4);
         myQueue.enqueue(5);
-        myQueue.enqueue(6);
+/*        myQueue.enqueue(6);
         myQueue.enqueue(7);
         myQueue.enqueue(8);
         myQueue.enqueue(9);
@@ -119,7 +119,7 @@ public class MainTest {
         myQueue.enqueue(12);
         myQueue.enqueue(13);
         myQueue.enqueue(14);
-        myQueue.enqueue(15);
+        myQueue.enqueue(15);*/
         for (int i = 0; i < 5; i++) {
             System.out.println(myQueue.dequeue());
         }
@@ -129,7 +129,7 @@ public class MainTest {
         myQueue.enqueue(19);
         myQueue.enqueue(20);
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println(myQueue.dequeue());
         }
     }

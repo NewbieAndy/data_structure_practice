@@ -33,14 +33,11 @@ public class MyQueue<T> {
         //判断是否满了
         if (currentSize == currentCapactiy) {
             ensureCapacity(currentSize * 2 + 1);
-        }
-        theArray[tail++] = value;
-        if (tail >=currentCapactiy) {
+        } else if (tail >= currentCapactiy) {
             tail = tail % currentCapactiy;
-            System.out.println("当前tail指针位置"+tail);
+            System.out.println("当前tail指针位置" + tail);
             System.out.println("入队当前队列容量:" + currentCapactiy);
         }
-        currentSize++;
     }
 
     //出队
@@ -49,15 +46,16 @@ public class MyQueue<T> {
             throw new NoSuchElementException();
         }
         T t = theArray[head++];
-        if (head >=currentCapactiy) {
+        if (head >= currentCapactiy) {
             head = head % currentCapactiy;
-            System.out.println("当前head指针位置"+head);
+            System.out.println("当前head指针位置" + head);
             System.out.println("出队当前队列容量:" + currentCapactiy);
         }
         currentSize--;
         return t;
     }
 
+    //扩容两种判断,当头指针在0位置尾指针在0位置
     public void ensureCapacity(int newCapacity) {
         if (currentSize > newCapacity) {
             return;
@@ -66,7 +64,7 @@ public class MyQueue<T> {
         currentCapactiy = newCapacity;
         T[] oldArry = theArray;
         theArray = (T[]) new Object[newCapacity];
-        if (newCapacity == DEFAULT_CAPACITY || (head == 0 && tail == 0)) {
+        if (newCapacity == DEFAULT_CAPACITY || (head == 0 && tail == oldCapacity)) {
             for (int i = 0; i < currentSize; i++) {
                 theArray[i] = oldArry[i];
             }
