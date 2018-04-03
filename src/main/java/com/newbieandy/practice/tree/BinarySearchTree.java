@@ -38,6 +38,64 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         }
     }
 
+    //查询最小值
+    private BinaryNode<T> findMin(BinaryNode<T> tree) {
+        if (null == tree) {
+            return null;
+        } else if (null == tree.left) {
+            return tree;
+        }
+        return findMin(tree.left);
+    }
+
+    //查询最大值
+    private BinaryNode<T> findMax(BinaryNode<T> tree) {
+        if (null == tree) {
+            return null;
+        }
+        while (null != tree.right) {
+            tree = tree.right;
+        }
+        return tree;
+    }
+
+    private BinaryNode<T> insert(T element, BinaryNode<T> tree) {
+        if (null == tree) {
+            return new BinaryNode<T>(element, null, null);
+        }
+        int compareResult = element.compareTo(tree.element);
+        if (compareResult < 0) {
+            insert(element, tree.left);
+        } else if (compareResult > 0) {
+            insert(element, tree.right);
+        } else {
+            //重复数据不处理
+        }
+        return tree;
+    }
+
+    private BinaryNode<T> remove(T element, BinaryNode<T> tree) {
+        if (null == tree) {
+            return null;
+        }
+        int compareResult = element.compareTo(tree.element);
+        if (compareResult > 0) {
+            remove(element, tree.right);
+        } else if (compareResult < 0) {
+            remove(element, tree.left);
+        } else if (null != tree.left && null != tree.right) {
+            //找到要删除的节点,且有两个子节点
+            //右节点最小值替代当前节点
+            tree.element = findMin(tree.right).element;
+            //在右子节点上删除此值
+            remove(tree.element, tree.right);
+        } else {
+            //只有一个节点
+            tree = null != tree.left ? tree.left : tree.right;
+        }
+        return tree;
+    }
+
     private static class BinaryNode<T> {
 
         //数据
