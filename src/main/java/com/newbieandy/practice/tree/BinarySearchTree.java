@@ -102,9 +102,9 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         }
         int compareResult = element.compareTo(tree.element);
         if (compareResult < 0) {
-            insert(element, tree.left);
+            tree.left = insert(element, tree.left);
         } else if (compareResult > 0) {
-            insert(element, tree.right);
+            tree.right = insert(element, tree.right);
         } else {
             //重复数据不处理
         }
@@ -117,9 +117,9 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         }
         int compareResult = element.compareTo(tree.element);
         if (compareResult > 0) {
-            remove(element, tree.right);
+            tree.right = remove(element, tree.right);
         } else if (compareResult < 0) {
-            remove(element, tree.left);
+            tree.left = remove(element, tree.left);
         } else if (null != tree.left && null != tree.right) {
             //找到要删除的节点,且有两个子节点
             //右节点最小值替代当前节点
