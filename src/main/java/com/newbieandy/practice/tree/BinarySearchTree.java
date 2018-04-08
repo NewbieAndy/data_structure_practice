@@ -1,5 +1,8 @@
 package com.newbieandy.practice.tree;
 
+import java.nio.BufferUnderflowException;
+import java.util.NoSuchElementException;
+
 /**
  * Created by mchao on 2018/4/2.
  */
@@ -14,6 +17,40 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
     //清空树
     public void makeEmpty() {
         root = null;
+    }
+
+    public boolean isEmpty(){
+        return null == root;
+    }
+
+    public boolean contains(T element){
+        return contains(element,root);
+    }
+
+    public T findMin(){
+        if (isEmpty()){
+            throw new NoSuchElementException();
+        }
+        return findMin(root).element;
+    }
+
+    public T findMax(){
+        if (isEmpty()){
+            throw new NoSuchElementException();
+        }
+        return findMax(root).element;
+    }
+
+    public void insert(T element){
+        root = insert(element,root);
+    }
+
+    public void remove(T element){
+        root = remove(element,root);
+    }
+
+    public void  printTree(){
+        //todo 打印树
     }
 
     /**
@@ -90,8 +127,8 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
             //在右子节点上删除此值
             remove(tree.element, tree.right);
         } else {
-            //只有一个节点
-            tree = null != tree.left ? tree.left : tree.right;
+            //找到要删除的节点,若有一个子节点.则该子节点上升.若无子节点,这同样置为null
+            tree = (null != tree.left) ? tree.left : tree.right;
         }
         return tree;
     }
