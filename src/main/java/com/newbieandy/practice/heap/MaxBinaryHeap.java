@@ -5,21 +5,21 @@ package com.newbieandy.practice.heap;
  *
  * @param <T>
  */
-public class BinaryHeap<T extends Comparable<? super T>> {
+public class MaxBinaryHeap<T extends Comparable<? super T>> {
     private static final int DEFAULT_CAPACITY = 10;
     private int currentSize;
     private T[] array;
 
-    public BinaryHeap() {
+    public MaxBinaryHeap() {
         this(DEFAULT_CAPACITY);
     }
 
-    public BinaryHeap(int capacity) {
+    public MaxBinaryHeap(int capacity) {
         this.currentSize = 0;
         this.array = (T[]) new Comparable[capacity + 1];
     }
 
-    public BinaryHeap(T[] items) {
+    public MaxBinaryHeap(T[] items) {
 
     }
 
@@ -40,14 +40,14 @@ public class BinaryHeap<T extends Comparable<? super T>> {
         array[hole] = t;
     }
 
-    public T findMin() throws Exception {
+    public T findMax() throws Exception {
         if (isEmpty()) {
             throw new Exception();
         }
         return array[1];
     }
 
-    public T deleteMin() {
+    public T deleteMax() {
         return null;
     }
 
