@@ -20,7 +20,13 @@ public class MaxBinaryHeap<T extends Comparable<? super T>> {
     }
 
     public MaxBinaryHeap(T[] items) {
-
+        currentSize = items.length;
+        array = (T[]) new Comparable[(currentSize + 2) * 11 / 10];
+        int i = 1;
+        for (T item : items) {
+            array[i++] = item;
+        }
+        buildHeap();
     }
 
     public void insert(T t) {
@@ -33,7 +39,7 @@ public class MaxBinaryHeap<T extends Comparable<? super T>> {
         //如果新位置非根,且比其父节点大,则进行挪位
         //循环结束插入位置已经腾空出来,在进行赋值
         int hole = ++currentSize;
-        for (array[0] = t; hole > 1 && t.compareTo(array[hole / 2]) > 0; hole /= 2) {
+        for (; hole > 1 && t.compareTo(array[hole / 2]) > 0; hole /= 2) {
             array[hole] = array[hole / 2];
         }
         //插入位置的节点
@@ -47,7 +53,13 @@ public class MaxBinaryHeap<T extends Comparable<? super T>> {
         return array[1];
     }
 
-    public T deleteMax() {
+    public T deleteMax() throws Exception {
+        if (isEmpty()) {
+            throw new Exception();
+        }
+        T maxItem = findMax();
+        //最后一个元素放到顶部
+        array[1] = array[currentSize--];
         return null;
     }
 
@@ -60,12 +72,37 @@ public class MaxBinaryHeap<T extends Comparable<? super T>> {
     }
 
 
+    /**
+     * 下滤
+     *
+     * @param hole
+     */
     private void percolateDown(int hole) {
+        int child;
+        T temp = array[hole];
+        for (; hole * 2 <= currentSize; hole = child) {
+            //left
+            child = hole * 2;
+            //左右孩子中找最大值
+            if (child != currentSize && array[child + 1].compareTo(array[child]) > 0) {
+                //right
+                child++;
+            }
 
+            //孩子与目标值进行对比
+            if (array[child].compareTo(temp) > 0) {
+                array[hole] = array[child];
+            } else {
+                break;
+            }
+        }
+        array[hole] = temp;
     }
 
     private void buildHeap() {
-
+        for (int i = currentSize / 2; i > 0; i--) {
+            percolateDown(i);
+        }
     }
 
     private void enlargeArray(int newSize) {
