@@ -7,10 +7,12 @@ import java.util.Random;
  */
 public class SortPractice {
     public static void main(String[] args) {
-        int[] arr = getArr(16);
+        int[] arr = getArr(30);
+//        int[] arr = new int[]{6, 53, 5, 1, 0, 3, 2, 0, 4, 8};
         printArr(arr);
 //        bubblingSort(arr);
-        insertSort(arr);
+//        insertSort(arr);
+        quickSort(arr, 0, arr.length - 1);
         System.out.println("======");
         printArr(arr);
     }
@@ -62,5 +64,70 @@ public class SortPractice {
             }
             arr[j] = temp;
         }
+    }
+
+    /**
+     * 快速排序
+     *
+     * @param arr
+     */
+    private static void quickSort(int[] arr, int leftIdx, int rightIdx) {
+        if (1 < (rightIdx - leftIdx)) {
+            int pivot = getPivot(arr, leftIdx, rightIdx);
+            int i = leftIdx;
+            int j = rightIdx - 1;
+            for (; ; ) {
+                while (arr[++i] < pivot) {
+                }
+                while (arr[--j] > pivot) {
+                }
+                if (i < j) {
+                    swap(arr, i, j);
+                } else break;
+            }
+            swap(arr, i, rightIdx - 1);
+            quickSort(arr, leftIdx, i - 1);
+            quickSort(arr, i + 1, rightIdx);
+        } else {
+            if (arr[leftIdx] > arr[rightIdx]) {
+                swap(arr, leftIdx, rightIdx);
+            }
+        }
+    }
+
+    /**
+     * 确定主元
+     *
+     * @param arr
+     * @param leftIdx
+     * @param rightIdx
+     * @return
+     */
+    private static int getPivot(int[] arr, int leftIdx, int rightIdx) {
+        int centerIdx = (leftIdx + rightIdx) / 2;
+        if (arr[leftIdx] > arr[centerIdx]) {
+            swap(arr, leftIdx, centerIdx);
+        }
+        if (arr[leftIdx] > arr[rightIdx]) {
+            swap(arr, leftIdx, rightIdx);
+        }
+        if (arr[centerIdx] > arr[rightIdx]) {
+            swap(arr, centerIdx, rightIdx);
+        }
+        swap(arr, centerIdx, rightIdx - 1);
+        return arr[rightIdx - 1];
+    }
+
+    /**
+     * 交换数据
+     *
+     * @param arr
+     * @param leftIdx
+     * @param rightIdx
+     */
+    private static void swap(int[] arr, int leftIdx, int rightIdx) {
+        int temp = arr[leftIdx];
+        arr[leftIdx] = arr[rightIdx];
+        arr[rightIdx] = temp;
     }
 }
