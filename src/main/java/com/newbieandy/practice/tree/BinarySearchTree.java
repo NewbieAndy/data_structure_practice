@@ -1,6 +1,6 @@
 package com.newbieandy.practice.tree;
 
-import java.nio.BufferUnderflowException;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 /**
@@ -19,38 +19,65 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         root = null;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return null == root;
     }
 
-    public boolean contains(T element){
-        return contains(element,root);
+    public boolean contains(T element) {
+        return contains(element, root);
     }
 
-    public T findMin(){
-        if (isEmpty()){
+    public T findMin() {
+        if (isEmpty()) {
             throw new NoSuchElementException();
         }
         return findMin(root).element;
     }
 
-    public T findMax(){
-        if (isEmpty()){
+    public T findMax() {
+        if (isEmpty()) {
             throw new NoSuchElementException();
         }
         return findMax(root).element;
     }
 
-    public void insert(T element){
-        root = insert(element,root);
+    public void insert(T element) {
+        root = insert(element, root);
     }
 
-    public void remove(T element){
-        root = remove(element,root);
+    public void remove(T element) {
+        root = remove(element, root);
     }
 
-    public void  printTree(){
-        //todo 打印树
+    public void printTree() {
+        if (isEmpty()) {
+            System.out.println("empty tree");
+        } else {
+            printTree(root);
+        }
+    }
+
+    private void printTree(BinaryNode t) {
+        if (t != null) {
+            printTree(t.left);
+            System.out.println(t.element);
+            printTree(t.right);
+        }
+    }
+
+    private void noRecursionPrintTree(BinaryNode t) {
+        LinkedList<BinaryNode> stack = new LinkedList<BinaryNode>();
+        BinaryNode currentNode = t;
+        while (null != currentNode || !stack.isEmpty()) {
+            while (null != currentNode) {
+                stack.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            if (!stack.isEmpty()) {
+                //todo
+                currentNode = stack.peek();
+            }
+        }
     }
 
     /**
