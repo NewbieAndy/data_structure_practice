@@ -23,7 +23,20 @@ public class ReverseInteger {
         int rev = 0;
         while (x != 0) {
             int pop = x % 10;
+            if (rev > 0 && rev > (Integer.MAX_VALUE - pop) / 10) {
+                return 0;
+            }
+            if (rev < 0 && rev < (Integer.MIN_VALUE - pop) / 10) {
+                return 0;
+            }
+            rev = rev * 10 + pop;
+            x = x / 10;
         }
-        return x;
+        return rev;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(reverse(123));
     }
 }
