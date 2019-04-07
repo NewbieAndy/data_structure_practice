@@ -1,4 +1,4 @@
-package com.newbieandy.algorithm.linked;
+package com.newbieandy.leetcode.linked;
 
 /**
  * Example 1:

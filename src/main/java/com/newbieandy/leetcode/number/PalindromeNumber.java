@@ -1,4 +1,4 @@
-package com.newbieandy.algorithm.number;
+package com.newbieandy.leetcode.number;
 
 public class PalindromeNumber {
     private static boolean isPalindrome(int x) {

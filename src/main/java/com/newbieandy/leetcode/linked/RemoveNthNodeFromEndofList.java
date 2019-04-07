@@ -1,4 +1,4 @@
-package com.newbieandy.algorithm.linked;
+package com.newbieandy.leetcode.linked;
 
 /**
  * Given linked list: 1->2->3->4->5, and n = 2.

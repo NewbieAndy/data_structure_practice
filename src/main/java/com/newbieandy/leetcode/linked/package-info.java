@@ -1,4 +1,4 @@
-package com.newbieandy.algorithm.linked;
+package com.newbieandy.leetcode.linked;
 /*
 0.删除链表中指定元素 203
 1.单链表反转   206

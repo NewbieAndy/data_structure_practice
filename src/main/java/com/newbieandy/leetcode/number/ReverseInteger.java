@@ -1,4 +1,4 @@
-package com.newbieandy.algorithm.number;
+package com.newbieandy.leetcode.number;
 
 /**
  * Example 1:
